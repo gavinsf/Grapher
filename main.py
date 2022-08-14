@@ -6,17 +6,26 @@ import tkinter.ttk as ttk
 WINDOW_WIDTH = 1600
 WINDOW_HEIGHT = 900
 
-root = tk.Tk(className="Grapher")
-root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
-root.configure(bg="grey")
 
-
-class Graph:
+class Main(tk.Frame):
     def __init__(self):
-        cvs_graph = tk.Canvas(root, bg="white", height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
-        cvs_graph.pack()
+        self.graph = Graph()
+        self.input = Input()
+
+
+class Graph(tk.Frame):
+    def __init__(self):
+        cvs_graph = tk.Canvas(root, bg="white", height= 2*WINDOW_HEIGHT/3, width=WINDOW_WIDTH)
+        cvs_graph.grid(row=0, column=0)
         functions = []
         self.functions = functions
+
+
+class Input(tk.Frame):
+    def __init__(self):
+        ent = tk.Entry(root, bg="grey")
+        ent.grid(row=1, column=0, ipadx=WINDOW_WIDTH/2-60, ipady=10)
+        self.ent = ent
 
 
 class Function:
@@ -36,6 +45,9 @@ class Draw:
         pass
 
 
-graph = Graph()
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk(className="Grapher")
+    root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+    root.configure(bg="black")
+    main = Main()
+    root.mainloop()
